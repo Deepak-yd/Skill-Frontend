@@ -1,0 +1,18 @@
+
+services:
+  - type: web
+    name: prohire-java-backend
+    runtime: docker
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://metro.proxy.rlwy.net:34252/railway
+      - key: SPRING_DATASOURCE_USERNAME
+        value: root
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: WYBqeUXWHVMyUGuoNqfhHyILyKcZkGGd
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: PROHIRE_JWT_SECRET
+        value: super-secret-key-that-is-at-least-32-characters-long
