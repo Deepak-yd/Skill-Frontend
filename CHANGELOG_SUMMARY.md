@@ -63,6 +63,28 @@ This document provides a comprehensive overview of all synchronization, configur
 - **Categories**: Dynamic category selection component used for filtering and classification.
 - **Share/Reviews**: Integrated social sharing and feedback systems to build community trust.
 
+## 📐 8. Technical Workflow & Layer Mapping
+
+### 🔄 End-to-End Interaction Flow
+1. **Frontend Trigger**: A user interacts with a React component (e.g., clicks "Hire").
+2. **API Orchestration**: The component calls a function in `src/api.js`.
+3. **Authentication**: If the user is logged in, `api.js` automatically attaches the JWT token from `localStorage` to the `Authorization` header.
+4. **Backend Processing**: The Spring Boot **Controller** receives the REST request, validates the token via `JwtRequestFilter`, and interacts with the **Repository** (Hibernate/JPA) to perform database operations.
+5. **Data Response**: The backend returns raw JSON.
+6. **Data Shaping**: `src/api.js` uses "shaping functions" (like `shapeUser` or `shapeProfessional`) to normalize the backend JSON into a format the frontend expects.
+7. **UI Update**: The React component receives the shaped data and updates the state, reflecting changes to the user.
+
+### 🗺️ Backend Layer Mapping
+- **Controller Layer**: Handles HTTP requests, manages role-based security, and orchestrates data flow.
+- **Model/Entity Layer**: Defines the database schema using JPA annotations (e.g., `@Entity`, `@Table`, `@OneToMany`).
+- **Repository Layer**: Extends `JpaRepository` to provide ready-made database operations (CRUD) without writing SQL.
+- **Database (MySQL)**: Persistent storage for all users, profiles, jobs, and platform interactions.
+
+### 🏗️ Workflow & States
+- **User States**: Roles (Admin, Professional, User) determine accessible features and dashboard layouts.
+- **Job States**: Transitions from `OPEN` to `IN_PROGRESS` and finally `COMPLETED`.
+- **Hire/Contract Workflow**: Initiation via **HireModal** -> Active tracking in **MyHires** -> Real-time progress updates.
+
 ---
 
 **Last Updated**: April 2026
