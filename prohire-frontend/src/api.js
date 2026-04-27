@@ -1,7 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
     ? "http://localhost:8080/api" 
-    : "https://skill-project-fsad-ic4y.onrender.com/api");
+    : "https://skill-fsad.onrender.com/api");
 
 function toCurrency(value) {
   return `$${Number(value || 0).toFixed(0)}`;
