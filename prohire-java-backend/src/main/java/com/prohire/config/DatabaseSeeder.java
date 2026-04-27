@@ -7,6 +7,10 @@ import com.prohire.model.Professional;
 import com.prohire.model.Service;
 import com.prohire.model.Job;
 import com.prohire.model.Hire;
+import com.prohire.model.Message;
+import com.prohire.model.Connection;
+import com.prohire.model.Share;
+import com.prohire.model.PlatformSetting;
 import com.prohire.repository.UserRepository;
 import com.prohire.repository.ProfessionalRepository;
 import com.prohire.repository.JobRepository;
@@ -157,9 +161,25 @@ public class DatabaseSeeder implements CommandLineRunner {
         aiCat.setDescription("Artificial Intelligence and Machine Learning Models");
         aiCat.setIcon("🤖");
 
-        categoryRepository.saveAll(List.of(webCat, designCat, aiCat));
+        Category mobileCat = categoryRepository.findByName("Mobile Development")
+            .orElse(Category.builder().name("Mobile Development").build());
+        mobileCat.setDescription("Native and Cross-platform Mobile Apps");
+        mobileCat.setIcon("📱");
+
+        Category cloudCat = categoryRepository.findByName("Cloud Computing")
+            .orElse(Category.builder().name("Cloud Computing").build());
+        cloudCat.setDescription("AWS, Azure, and Google Cloud Solutions");
+        cloudCat.setIcon("☁️");
+
+        Category cyberCat = categoryRepository.findByName("Cybersecurity")
+            .orElse(Category.builder().name("Cybersecurity").build());
+        cyberCat.setDescription("Network Security and Penetration Testing");
+        cyberCat.setIcon("🛡️");
+
+        categoryRepository.saveAll(List.of(webCat, designCat, aiCat, mobileCat, cloudCat, cyberCat));
         categoryRepository.flush();
 
+        // 5. PROFESSIONAL PROFILE
         // 5. PROFESSIONAL PROFILE
         Professional professional = Professional.builder()
             .user(proUser)
@@ -171,6 +191,61 @@ public class DatabaseSeeder implements CommandLineRunner {
             .reviewCount(120)
             .build();
         professionalRepository.save(professional);
+
+        // 5.1 ADDITIONAL PROFESSIONALS
+        User pro2User = userRepository.findByEmail("pro2@klu.in")
+            .orElse(User.builder().email("pro2@klu.in").build());
+        pro2User.setPassword(encodedPassword);
+        pro2User.setFullName("Sneha Mobile");
+        pro2User.setRole("PROFESSIONAL");
+        pro2User.setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha");
+        pro2User.setIsEmailVerified(true);
+        Profile pro2Profile = pro2User.getProfile();
+        if (pro2Profile == null) {
+            pro2Profile = Profile.builder().user(pro2User).build();
+            pro2User.setProfile(pro2Profile);
+        }
+        pro2Profile.setBio("Specialist in Flutter and React Native development with 5 years experience.");
+        pro2Profile.setLocation("Hyderabad, India");
+        userRepository.save(pro2User);
+
+        Professional pro2 = Professional.builder()
+            .user(pro2User)
+            .category(mobileCat)
+            .title("Senior Mobile Architect")
+            .rateValue(120.0)
+            .skills(List.of("Flutter", "Dart", "Swift", "Kotlin", "Firebase"))
+            .rating(4.8)
+            .reviewCount(85)
+            .build();
+        professionalRepository.save(pro2);
+
+        User pro3User = userRepository.findByEmail("pro3@klu.in")
+            .orElse(User.builder().email("pro3@klu.in").build());
+        pro3User.setPassword(encodedPassword);
+        pro3User.setFullName("Rahul Cloud");
+        pro3User.setRole("PROFESSIONAL");
+        pro3User.setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul");
+        pro3User.setIsEmailVerified(true);
+        Profile pro3Profile = pro3User.getProfile();
+        if (pro3Profile == null) {
+            pro3Profile = Profile.builder().user(pro3User).build();
+            pro3User.setProfile(pro3Profile);
+        }
+        pro3Profile.setBio("AWS Certified Solutions Architect helping businesses move to the cloud.");
+        pro3Profile.setLocation("Pune, India");
+        userRepository.save(pro3User);
+
+        Professional pro3 = Professional.builder()
+            .user(pro3User)
+            .category(cloudCat)
+            .title("Cloud Solutions Architect")
+            .rateValue(180.0)
+            .skills(List.of("AWS", "Kubernetes", "Terraform", "Docker", "DevOps"))
+            .rating(4.9)
+            .reviewCount(42)
+            .build();
+        professionalRepository.save(pro3);
 
         // 6. SERVICES
         Service s1 = Service.builder()
@@ -191,6 +266,25 @@ public class DatabaseSeeder implements CommandLineRunner {
             .build();
         serviceRepository.save(s1);
         serviceRepository.save(s2);
+
+        // 6.1 ADDITIONAL SERVICES
+        Service s3 = Service.builder()
+            .professional(pro2)
+            .name("Cross-Platform Mobile App")
+            .description("Build once, deploy to both iOS and Android with Flutter.")
+            .price(4000.0)
+            .priceLabel("$4000 Fixed")
+            .duration("3 Weeks")
+            .build();
+        Service s4 = Service.builder()
+            .professional(pro3)
+            .name("Cloud Infrastructure Setup")
+            .description("Complete AWS infrastructure setup with IaC using Terraform.")
+            .price(150.0)
+            .priceLabel("$150/hr")
+            .duration("2 Weeks")
+            .build();
+        serviceRepository.saveAll(List.of(s3, s4));
 
         // 7. JOBS
         Job j1 = Job.builder()
@@ -218,6 +312,31 @@ public class DatabaseSeeder implements CommandLineRunner {
         jobRepository.save(j1);
         jobRepository.save(j2);
 
+        // 7.1 ADDITIONAL JOBS
+        Job j3 = Job.builder()
+            .poster(client)
+            .title("Crypto Wallet Development")
+            .description("Looking for a developer to build a secure non-custodial crypto wallet.")
+            .location("Remote")
+            .type("FULL_TIME")
+            .budget(15000.0)
+            .category("Cybersecurity")
+            .skills(List.of("Solidity", "Web3.js", "Cryptography", "React"))
+            .status("OPEN")
+            .build();
+        Job j4 = Job.builder()
+            .poster(admin)
+            .title("Infrastructure Migration")
+            .description("Need help migrating our on-premise servers to AWS.")
+            .location("Remote")
+            .type("CONTRACT")
+            .budget(10000.0)
+            .category("Cloud Computing")
+            .skills(List.of("AWS", "Migration", "Linux"))
+            .status("OPEN")
+            .build();
+        jobRepository.saveAll(List.of(j3, j4));
+
         // 8. HIRES
         Hire h1 = Hire.builder()
             .clientUser(client)
@@ -231,6 +350,65 @@ public class DatabaseSeeder implements CommandLineRunner {
             .build();
         hireRepository.save(h1);
 
-        System.out.println("✅ Database Seeded Successfully with 3 Core @klu.in Users and Full Details!");
+        Hire h2 = Hire.builder()
+            .clientUser(client)
+            .professional(pro2)
+            .service(s3)
+            .serviceTitle(s3.getName())
+            .amountValue(4000.0)
+            .notes("Working on UI wireframes.")
+            .progress(10)
+            .status("ONGOING")
+            .build();
+        hireRepository.save(h2);
+
+        // 9. MESSAGES
+        Message m1 = Message.builder()
+            .sender(client)
+            .receiver(proUser)
+            .content("Hi Ankit, can you provide an update on the dashboard?")
+            .isRead(true)
+            .build();
+        Message m2 = Message.builder()
+            .sender(proUser)
+            .receiver(client)
+            .content("Yes Suresh, I'll send the report by EOD.")
+            .isRead(false)
+            .build();
+        messageRepository.saveAll(List.of(m1, m2));
+
+        // 10. CONNECTIONS
+        Connection c1 = Connection.builder()
+            .sender(client)
+            .receiver(pro2User)
+            .status("ACCEPTED")
+            .build();
+        Connection c2 = Connection.builder()
+            .sender(pro3User)
+            .receiver(admin)
+            .status("PENDING")
+            .build();
+        connectionRepository.saveAll(List.of(c1, c2));
+
+        // 11. SHARES
+        Share sh1 = Share.builder()
+            .title("ProHire Platform Launch")
+            .url("https://prohire.klu.in/launch")
+            .build();
+        Share sh2 = Share.builder()
+            .title("Top Web Development Trends 2026")
+            .url("https://prohire.klu.in/blog/web-trends-2026")
+            .build();
+        shareRepository.saveAll(List.of(sh1, sh2));
+
+        // 12. PLATFORM SETTINGS
+        platformSettingRepository.save(PlatformSetting.builder()
+            .settingKey("platform_fee")
+            .settingValue("10")
+            .build());
+        platformSettingRepository.save(PlatformSetting.builder()
+            .settingKey("maintenance_mode")
+            .settingValue("false")
+            .build());
     }
 }
