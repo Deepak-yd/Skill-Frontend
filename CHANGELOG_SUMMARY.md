@@ -39,6 +39,30 @@ This document provides a comprehensive overview of all synchronization, configur
 - **Seeded Experts**: Added diverse professional profiles (Architects, Designers, AI Engineers) with ratings, skills, and review counts.
 - **Active Marketplace**: Seeded multiple Jobs and active Hires to demonstrate the full platform lifecycle from posting to completion.
 
+## 🏗️ 7. Frontend Architecture & Components
+
+### 🖥️ Core Pages & Dashboards
+- **Landing Page**: Immersive "Red Premium" aesthetic with glassmorphism, featuring platform highlights and clear Call-to-Actions (CTAs).
+- **Authentication**: Fully functional **Login** and **Register** flows with role-based redirection.
+- **User Dashboard**: Overview of active hires, recent messages, and platform statistics for regular clients.
+- **Professional Dashboard**: Specialized view for experts to manage their services, active jobs, and earnings.
+- **Admin Panel**: High-level management interface for users, categories, and platform-wide settings.
+- **Profile Page**: Comprehensive view for viewing and editing personal details, professional skills, and social links.
+
+### 💼 Marketplace Features
+- **Experts (Professionals)**: A searchable grid of available professionals with filtering by category and skill.
+- **Jobs Board**: A centralized location for clients to post job requirements and for professionals to browse opportunities.
+- **MyHires**: A dedicated tracking page for current and historical service contracts, showing progress and status.
+- **Connections**: Social management system for sending and accepting connection requests between users.
+
+### 🧩 Key Components
+- **Navbar**: Responsive navigation with dynamic links based on user authentication status and role.
+- **ProfessionalCard**: High-fidelity UI component for displaying expert summaries, ratings, and call-to-actions.
+- **HireModal**: Interactive booking flow for clients to initiate service contracts with professionals.
+- **ChatModal/Messages**: Real-time messaging interface for direct communication between clients and experts.
+- **Categories**: Dynamic category selection component used for filtering and classification.
+- **Share/Reviews**: Integrated social sharing and feedback systems to build community trust.
+
 ---
 
 **Last Updated**: April 2026
