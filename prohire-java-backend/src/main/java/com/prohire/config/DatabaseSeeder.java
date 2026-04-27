@@ -13,6 +13,7 @@ import com.prohire.repository.JobRepository;
 import com.prohire.repository.CategoryRepository;
 import com.prohire.repository.ServiceRepository;
 import com.prohire.repository.HireRepository;
+import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -65,27 +66,31 @@ public class DatabaseSeeder implements CommandLineRunner {
         Category webCat = Category.builder().name("Web").description("Web Development").icon("🌐").build();
         Category designCat = Category.builder().name("Design").description("UI/UX Design").icon("🎨").build();
         Category aiCat = Category.builder().name("AI/ML").description("Artificial Intelligence").icon("🤖").build();
-        categoryRepository.saveAll(Arrays.asList(webCat, designCat, aiCat));
+        categoryRepository.save(webCat);
+        categoryRepository.save(designCat);
+        categoryRepository.save(aiCat);
 
         // Professionals
-        Professional pro1 = Professional.builder().user(pro1User).category(webCat).title("Senior Backend Architect").rateValue(120.0).skills(Arrays.asList("Java", "Spring Boot", "React", "AWS")).rating(4.9).reviewCount(120).build();
+        Professional pro1 = Professional.builder().user(pro1User).category(webCat).title("Senior Backend Architect").rateValue(120.0).skills(List.of("Java", "Spring Boot", "React", "AWS")).rating(4.9).reviewCount(120).build();
         professionalRepository.save(pro1);
 
-        Professional pro2 = Professional.builder().user(pro2User).category(designCat).title("Lead UX Designer").rateValue(95.0).skills(Arrays.asList("Figma", "UI/UX", "TailwindCSS", "React")).rating(5.0).reviewCount(85).build();
+        Professional pro2 = Professional.builder().user(pro2User).category(designCat).title("Lead UX Designer").rateValue(95.0).skills(List.of("Figma", "UI/UX", "TailwindCSS", "React")).rating(5.0).reviewCount(85).build();
         professionalRepository.save(pro2);
 
         // Services
         Service s1 = Service.builder().professional(pro1).name("Full-Stack Audit").description("Complete technical audit of your web application.").price(500.0).priceLabel("$500 Fixed").duration("1 Week").build();
         Service s2 = Service.builder().professional(pro1).name("API Development").description("Custom RESTful API development with Spring Boot.").price(120.0).priceLabel("$120/hr").duration("Ongoing").build();
-        serviceRepository.saveAll(Arrays.asList(s1, s2));
+        serviceRepository.save(s1);
+        serviceRepository.save(s2);
 
         Service s3 = Service.builder().professional(pro2).name("UI/UX Redesign").description("Modern, premium redesign of your platform.").price(1500.0).priceLabel("$1500 Fixed").duration("2 Weeks").build();
         serviceRepository.save(s3);
 
         // Jobs
-        Job j1 = Job.builder().poster(client).title("E-Commerce Platform Rebuild").description("Need a full-stack engineer to rebuild our legacy e-commerce platform using React and Spring Boot.").budget(10000.0).category("Web").skills(Arrays.asList("React", "Spring Boot", "MySQL")).location("Remote").type("CONTRACT").status("OPEN").build();
-        Job j2 = Job.builder().poster(admin).title("Internal Dashboard Design").description("Looking for a UI/UX expert to design a high-fidelity dark-mode dashboard.").budget(3000.0).category("Design").skills(Arrays.asList("Figma", "Dark Mode", "Dashboard")).location("New York").type("PART_TIME").status("OPEN").build();
-        jobRepository.saveAll(Arrays.asList(j1, j2));
+        Job j1 = Job.builder().poster(client).title("E-Commerce Platform Rebuild").description("Need a full-stack engineer to rebuild our legacy e-commerce platform using React and Spring Boot.").budget(10000.0).category("Web").skills(List.of("React", "Spring Boot", "MySQL")).location("Remote").type("CONTRACT").status("OPEN").build();
+        Job j2 = Job.builder().poster(admin).title("Internal Dashboard Design").description("Looking for a UI/UX expert to design a high-fidelity dark-mode dashboard.").budget(3000.0).category("Design").skills(List.of("Figma", "Dark Mode", "Dashboard")).location("New York").type("PART_TIME").status("OPEN").build();
+        jobRepository.save(j1);
+        jobRepository.save(j2);
 
         // Hires
         Hire h1 = Hire.builder().clientUser(client).professional(pro1).service(s1).serviceTitle(s1.getName()).amountValue(500.0).status("ONGOING").progress(40).notes("Audit started on the legacy codebase.").build();
