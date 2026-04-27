@@ -37,12 +37,20 @@ function shapeUser(user) {
 
 function shapeProfessional(pro) {
   if (!pro) return null;
+  
+  const categoryName = typeof pro.category === 'object' && pro.category !== null 
+    ? pro.category.name 
+    : pro.category || 'Uncategorized';
+
   return {
     ...pro,
     id: String(pro.id),
-    userId: String(pro.userId || ''),
-    categoryId: pro.categoryId ? String(pro.categoryId) : null,
-    category: pro.category || 'Uncategorized',
+    userId: String(pro.user?.id || pro.userId || ''),
+    name: pro.user?.fullName || pro.user?.email || pro.name || 'Expert Node',
+    avatar: pro.user?.profileImage || pro.avatar || '',
+    bio: pro.user?.profile?.bio || pro.bio || '',
+    categoryId: pro.category?.id ? String(pro.category.id) : null,
+    category: categoryName,
     rate: typeof pro.rate === 'string' ? pro.rate : toCurrency(pro.rateValue ?? pro.rate),
     skills: Array.isArray(pro.skills) ? pro.skills : [],
     reviewCount: Number(pro.reviewCount || 0),
