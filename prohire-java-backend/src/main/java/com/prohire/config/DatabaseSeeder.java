@@ -61,87 +61,101 @@ public class DatabaseSeeder implements CommandLineRunner {
         String encodedPassword = passwordEncoder.encode("password123");
 
         // 1. ADMIN USER
-        User admin = User.builder()
-            .email("admin@klu.in")
-            .password(encodedPassword)
-            .fullName("Deepak Admin")
-            .role("ADMIN")
-            .profileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Admin")
-            .isEmailVerified(true)
-            .build();
-        Profile adminProfile = Profile.builder()
-            .user(admin)
-            .avatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Admin")
-            .bio("Lead Platform Administrator at ProHire. Managing core operations and security.")
-            .location("Vijayawada, India")
-            .company("KLU Global")
-            .website("https://admin.klu.in")
-            .phone("+91 99999 88888")
-            .linkedIn("linkedin.com/in/deepak-admin")
-            .github("github.com/deepak-admin")
-            .twitter("@deepak_admin")
-            .portfolio("https://portfolio.klu.in/admin")
-            .build();
-        admin.setProfile(adminProfile);
+        User admin = userRepository.findByEmail("admin@klu.in")
+            .orElse(User.builder().email("admin@klu.in").build());
+        admin.setPassword(encodedPassword);
+        admin.setFullName("Deepak Admin");
+        admin.setRole("ADMIN");
+        admin.setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Admin");
+        admin.setIsEmailVerified(true);
+        
+        Profile adminProfile = admin.getProfile();
+        if (adminProfile == null) {
+            adminProfile = Profile.builder().user(admin).build();
+            admin.setProfile(adminProfile);
+        }
+        adminProfile.setAvatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Admin");
+        adminProfile.setBio("Lead Platform Administrator at ProHire. Managing core operations and security.");
+        adminProfile.setLocation("Vijayawada, India");
+        adminProfile.setCompany("KLU Global");
+        adminProfile.setWebsite("https://admin.klu.in");
+        adminProfile.setPhone("+91 99999 88888");
+        adminProfile.setLinkedIn("linkedin.com/in/deepak-admin");
+        adminProfile.setGithub("github.com/deepak-admin");
+        adminProfile.setTwitter("@deepak_admin");
+        adminProfile.setPortfolio("https://portfolio.klu.in/admin");
         userRepository.save(admin);
 
         // 2. CLIENT USER
-        User client = User.builder()
-            .email("client@klu.in")
-            .password(encodedPassword)
-            .fullName("Suresh Client")
-            .role("USER")
-            .profileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Suresh")
-            .isEmailVerified(true)
-            .build();
-        Profile clientProfile = Profile.builder()
-            .user(client)
-            .avatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Suresh")
-            .bio("Startup founder looking for top-tier professional talent to build the next unicorn.")
-            .location("Hyderabad, India")
-            .company("KLU Innovations")
-            .website("https://startup.klu.in")
-            .phone("+91 77777 66666")
-            .linkedIn("linkedin.com/in/suresh-client")
-            .github("github.com/suresh-client")
-            .twitter("@suresh_innovates")
-            .portfolio("https://portfolio.klu.in/suresh")
-            .build();
-        client.setProfile(clientProfile);
+        User client = userRepository.findByEmail("client@klu.in")
+            .orElse(User.builder().email("client@klu.in").build());
+        client.setPassword(encodedPassword);
+        client.setFullName("Suresh Client");
+        client.setRole("USER");
+        client.setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Suresh");
+        client.setIsEmailVerified(true);
+
+        Profile clientProfile = client.getProfile();
+        if (clientProfile == null) {
+            clientProfile = Profile.builder().user(client).build();
+            client.setProfile(clientProfile);
+        }
+        clientProfile.setAvatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Suresh");
+        clientProfile.setBio("Startup founder looking for top-tier professional talent to build the next unicorn.");
+        clientProfile.setLocation("Hyderabad, India");
+        clientProfile.setCompany("KLU Innovations");
+        clientProfile.setWebsite("https://startup.klu.in");
+        clientProfile.setPhone("+91 77777 66666");
+        clientProfile.setLinkedIn("linkedin.com/in/suresh-client");
+        clientProfile.setGithub("github.com/suresh-client");
+        clientProfile.setTwitter("@suresh_innovates");
+        clientProfile.setPortfolio("https://portfolio.klu.in/suresh");
         userRepository.save(client);
 
         // 3. PROFESSIONAL USER
-        User proUser = User.builder()
-            .email("pro@klu.in")
-            .password(encodedPassword)
-            .fullName("Ankit Professional")
-            .role("PROFESSIONAL")
-            .profileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Ankit")
-            .isEmailVerified(true)
-            .build();
-        Profile proProfile = Profile.builder()
-            .user(proUser)
-            .avatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Ankit")
-            .bio("Expert Full-Stack Developer with 8+ years of experience in Java, Spring, and React.")
-            .location("Bangalore, India")
-            .company("Ankit Tech Solutions")
-            .website("https://ankit.dev")
-            .phone("+91 88888 77777")
-            .linkedIn("linkedin.com/in/ankit-pro")
-            .github("github.com/ankit-dev")
-            .twitter("@ankit_codes")
-            .portfolio("https://ankit.dev/portfolio")
-            .build();
-        proUser.setProfile(proProfile);
+        User proUser = userRepository.findByEmail("pro@klu.in")
+            .orElse(User.builder().email("pro@klu.in").build());
+        proUser.setPassword(encodedPassword);
+        proUser.setFullName("Ankit Professional");
+        proUser.setRole("PROFESSIONAL");
+        proUser.setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Ankit");
+        proUser.setIsEmailVerified(true);
+
+        Profile proProfile = proUser.getProfile();
+        if (proProfile == null) {
+            proProfile = Profile.builder().user(proUser).build();
+            proUser.setProfile(proProfile);
+        }
+        proProfile.setAvatar("https://api.dicebear.com/7.x/avataaars/svg?seed=Ankit");
+        proProfile.setBio("Expert Full-Stack Developer with 8+ years of experience in Java, Spring, and React.");
+        proProfile.setLocation("Bangalore, India");
+        proProfile.setCompany("Ankit Tech Solutions");
+        proProfile.setWebsite("https://ankit.dev");
+        proProfile.setPhone("+91 88888 77777");
+        proProfile.setLinkedIn("linkedin.com/in/ankit-pro");
+        proProfile.setGithub("github.com/ankit-dev");
+        proProfile.setTwitter("@ankit_codes");
+        proProfile.setPortfolio("https://ankit.dev/portfolio");
         userRepository.save(proUser);
 
-        // 4. CATEGORIES
-        Category webCat = Category.builder().name("Web Development").description("Frontend, Backend, and Full Stack Solutions").icon("🌐").build();
-        Category designCat = Category.builder().name("UI/UX Design").description("User Interface and Experience Design").icon("🎨").build();
-        Category aiCat = Category.builder().name("AI & ML").description("Artificial Intelligence and Machine Learning Models").icon("🤖").build();
-        categoryRepository.save(webCat);
-        categoryRepository.save(designCat);
-        categoryRepository.save(aiCat);
+        // 4. CATEGORIES (Find-or-Create to prevent Duplicate Entry errors)
+        Category webCat = categoryRepository.findByName("Web Development")
+            .orElse(Category.builder().name("Web Development").build());
+        webCat.setDescription("Frontend, Backend, and Full Stack Solutions");
+        webCat.setIcon("🌐");
+        
+        Category designCat = categoryRepository.findByName("UI/UX Design")
+            .orElse(Category.builder().name("UI/UX Design").build());
+        designCat.setDescription("User Interface and Experience Design");
+        designCat.setIcon("🎨");
+        
+        Category aiCat = categoryRepository.findByName("AI & ML")
+            .orElse(Category.builder().name("AI & ML").build());
+        aiCat.setDescription("Artificial Intelligence and Machine Learning Models");
+        aiCat.setIcon("🤖");
+
+        categoryRepository.saveAll(List.of(webCat, designCat, aiCat));
+        categoryRepository.flush();
 
         // 5. PROFESSIONAL PROFILE
         Professional professional = Professional.builder()
