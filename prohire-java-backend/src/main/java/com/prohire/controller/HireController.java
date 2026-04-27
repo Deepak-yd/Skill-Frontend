@@ -45,7 +45,9 @@ public class HireController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
         hire.setClientUser(user);
-        hire.setStatus("PENDING");
+        if (hire.getStatus() == null) {
+            hire.setStatus("PENDING");
+        }
         hireRepository.save(hire);
         return ResponseEntity.ok(hire);
     }
@@ -57,6 +59,12 @@ public class HireController {
             hire.setStatus(update.getStatus());
         if (update.getAmountValue() != null)
             hire.setAmountValue(update.getAmountValue());
+        if (update.getProgress() != null)
+            hire.setProgress(update.getProgress());
+        if (update.getNotes() != null)
+            hire.setNotes(update.getNotes());
+        if (update.getServiceTitle() != null)
+            hire.setServiceTitle(update.getServiceTitle());
 
         hireRepository.save(hire);
         return ResponseEntity.ok(hire);

@@ -51,6 +51,10 @@ public class JobController {
             job.setDescription(update.getDescription());
         if (update.getBudget() != null)
             job.setBudget(update.getBudget());
+        if (update.getCategory() != null)
+            job.setCategory(update.getCategory());
+        if (update.getSkills() != null)
+            job.setSkills(update.getSkills());
         if (update.getStatus() != null)
             job.setStatus(update.getStatus());
 

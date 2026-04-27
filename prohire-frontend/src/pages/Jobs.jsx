@@ -170,6 +170,36 @@ export default function Jobs() {
                         </div>
                     </div>
 
+                    <div className="grid md:grid-cols-2 gap-10">
+                        <div className="space-y-4">
+                            <label className="block text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic px-1 pl-4 border-l-[3px] border-indigo-600">Location</label>
+                            <input 
+                              value={formData.location || ''} 
+                              onChange={(e) => setFormData({...formData, location: e.target.value})} 
+                              placeholder="Remote / HQ Location" 
+                              className="input-premium w-full bg-white/5 border-white/10 text-xl font-black italic shadow-inner py-6 px-8 rounded-2xl" 
+                              required 
+                            />
+                        </div>
+                        <div className="space-y-4">
+                            <label className="block text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic px-1 pl-4 border-l-[3px] border-indigo-600">Employment Type</label>
+                            <div className="relative group/select">
+                              <select 
+                                value={formData.type || ''} 
+                                onChange={(e) => setFormData({...formData, type: e.target.value})} 
+                                className="input-premium w-full bg-white/5 border-white/10 text-sm font-black italic shadow-inner py-6 px-8 rounded-2xl outline-none appearance-none cursor-pointer uppercase tracking-[0.3em]"
+                                required
+                              >
+                                  <option value="" className="bg-slate-900">SELECT TYPE</option>
+                                  <option value="FULL_TIME" className="bg-slate-900">FULL TIME</option>
+                                  <option value="PART_TIME" className="bg-slate-900">PART TIME</option>
+                                  <option value="CONTRACT" className="bg-slate-900">CONTRACT</option>
+                              </select>
+                              <div className="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">▼</div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="space-y-4">
                         <label className="block text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic px-1 pl-4 border-l-[3px] border-indigo-600">Description</label>
                         <textarea 

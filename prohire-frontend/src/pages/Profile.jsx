@@ -161,12 +161,14 @@ function Profile() {
           title: serviceForm.title,
           description: serviceForm.description,
           price: Number(serviceForm.price || 0),
+          duration: serviceForm.duration,
         });
       } else {
         await createService(myProfessional.id, {
           title: serviceForm.title,
           description: serviceForm.description,
           price: Number(serviceForm.price || 0),
+          duration: serviceForm.duration,
         });
       }
 
@@ -252,9 +254,14 @@ function Profile() {
                     <h3 className="text-[10px] font-black text-slate-700 uppercase tracking-[0.4em]">Primary Metadata</h3>
                     {[
                       { key: "location", label: "Operational Hub", icon: "📍" },
+                      { key: "phone", label: "Comms Link", icon: "📱" },
+                      { key: "company", label: "Affiliation", icon: "🏢" },
                       { key: "website", label: "External Nexus", icon: "🌐" },
+                      { key: "avatar", label: "Avatar URL", icon: "🖼️" },
                       { key: "linkedIn", label: "Neural Network", icon: "🔗" },
                       { key: "github", label: "Code Repository", icon: "📂" },
+                      { key: "twitter", label: "Broadcast Channel", icon: "🐦" },
+                      { key: "portfolio", label: "Asset Vault", icon: "🎨" },
                     ].map(field => (
                       <div key={field.key}>
                          <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">{field.label}</label>
@@ -351,6 +358,13 @@ function Profile() {
                             className="form-input"
                             required
                           />
+                          <input
+                            value={serviceForm.duration || ''}
+                            onChange={(e) => setServiceForm(s => ({...s, duration: e.target.value}))}
+                            placeholder="Duration (e.g. 2 weeks)"
+                            className="form-input sm:col-span-2"
+                            required
+                          />
                        </div>
                        <input
                          value={serviceForm.description}
@@ -375,7 +389,7 @@ function Profile() {
                                 <p className="text-indigo-400 font-black text-xl italic">{s.priceLabel}</p>
                                 {canManageServices && (
                                    <div className="flex gap-4">
-                                      <button onClick={() => setServiceForm({ id: s.id, title: s.title, description: s.description, price: s.price })} className="text-[8px] font-black uppercase text-indigo-500 hover:text-white transition">Modify</button>
+                                      <button onClick={() => setServiceForm({ id: s.id, title: s.title, description: s.description, price: s.price, duration: s.duration })} className="text-[8px] font-black uppercase text-indigo-500 hover:text-white transition">Modify</button>
                                       <button onClick={() => handleDeleteService(s.id)} className="text-[8px] font-black uppercase text-pink-500 hover:text-white transition">Sever</button>
                                    </div>
                                 )}
@@ -405,10 +419,32 @@ function Profile() {
                         </div>
                     </div>
                     {user?.role === 'PROFESSIONAL' && (
-                       <div>
-                          <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Financial Allocation</p>
-                          <p className="text-4xl font-black text-white tracking-tighter">${profileForm.hourlyRate}<span className="text-xs text-slate-600 font-black uppercase ml-1 italic">/per hr</span></p>
-                       </div>
+                       <>
+                          <div>
+                              <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Professional Title</p>
+                              {isEditing ? (
+                                <input value={profileForm.title} onChange={e => setProfileForm(f => ({...f, title: e.target.value}))} className="w-full bg-white/5 border-b border-indigo-500/50 py-2 text-sm font-bold text-white focus:outline-none" />
+                              ) : (
+                                <p className="text-white font-bold text-sm tracking-tight">{profileForm.title || 'Expert Node'}</p>
+                              )}
+                          </div>
+                          <div>
+                              <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Financial Allocation</p>
+                              {isEditing ? (
+                                <input type="number" value={profileForm.hourlyRate} onChange={e => setProfileForm(f => ({...f, hourlyRate: e.target.value}))} className="w-full bg-white/5 border-b border-indigo-500/50 py-2 text-3xl font-black text-white focus:outline-none" />
+                              ) : (
+                                <p className="text-4xl font-black text-white tracking-tighter">${profileForm.hourlyRate}<span className="text-xs text-slate-600 font-black uppercase ml-1 italic">/per hr</span></p>
+                              )}
+                          </div>
+                          <div>
+                              <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Core Capabilities (Comma Separated)</p>
+                              {isEditing ? (
+                                <textarea value={profileForm.skills} onChange={e => setProfileForm(f => ({...f, skills: e.target.value}))} className="w-full bg-white/5 border border-indigo-500/20 rounded-xl p-3 text-sm font-bold text-white focus:outline-none" />
+                              ) : (
+                                <p className="text-slate-400 text-xs italic">{profileForm.skills || 'None Listed'}</p>
+                              )}
+                          </div>
+                       </>
                     )}
                     <div className="pt-8 border-t border-white/5">
                        <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-4">Neural Strength</p>

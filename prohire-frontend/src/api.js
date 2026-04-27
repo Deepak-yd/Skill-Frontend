@@ -62,6 +62,7 @@ function shapeService(service) {
     ...service,
     id: String(service.id),
     professionalId: String(service.professionalId),
+    title: service.name || service.title || 'Untitled',
     price: Number(service.price || 0),
     priceLabel: service.priceLabel || toCurrency(service.price),
   };
@@ -243,17 +244,19 @@ export async function fetchServices(professionalId) {
 }
 
 export async function createService(professionalId, data) {
+  const payload = { ...data, name: data.title || data.name };
   const service = await request(`/professionals/${professionalId}/services`, {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: JSON.stringify(payload),
   });
   return shapeService(service);
 }
 
 export async function updateService(professionalId, serviceId, data) {
+  const payload = { ...data, name: data.title || data.name };
   const service = await request(`/professionals/${professionalId}/services/${serviceId}`, {
     method: 'PUT',
-    body: JSON.stringify(data),
+    body: JSON.stringify(payload),
   });
   return shapeService(service);
 }
@@ -269,7 +272,8 @@ export async function fetchHires() {
 }
 
 export async function createHire(data) {
-  const hire = await request('/hires', { method: 'POST', body: JSON.stringify(data) });
+  const payload = { ...data, amountValue: data.amount || data.amountValue };
+  const hire = await request('/hires', { method: 'POST', body: JSON.stringify(payload) });
   return shapeHire(hire);
 }
 

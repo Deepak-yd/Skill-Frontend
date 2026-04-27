@@ -29,6 +29,13 @@ public class Job {
     private String type; // FULL_TIME, PART_TIME, CONTRACT
     private Double budget;
     
+    private String category;
+
+    @ElementCollection
+    @CollectionTable(name = "job_skills", joinColumns = @JoinColumn(name = "job_id"))
+    @Column(name = "skill")
+    private java.util.List<String> skills;
+
     private String status; // OPEN, CLOSED
 
     private LocalDateTime createdAt;

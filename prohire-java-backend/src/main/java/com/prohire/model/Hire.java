@@ -29,6 +29,13 @@ public class Hire {
 
     private Double amountValue;
     
+    private String serviceTitle;
+    
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+    
+    private Integer progress;
+    
     private String status; // PENDING, ONGOING, COMPLETED, CANCELLED
 
     private LocalDateTime createdAt;

@@ -91,6 +91,8 @@ public class ProfessionalController {
             service.setPrice(update.getPrice());
         if (update.getPriceLabel() != null)
             service.setPriceLabel(update.getPriceLabel());
+        if (update.getDuration() != null)
+            service.setDuration(update.getDuration());
 
         serviceRepository.save(service);
         return ResponseEntity.ok(service);
