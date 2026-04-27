@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/share")
 @CrossOrigin(origins = "*") // Allow frontend access
+@SuppressWarnings("null")
 public class ShareController {
 
     @Autowired

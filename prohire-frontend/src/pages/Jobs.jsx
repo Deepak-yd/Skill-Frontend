@@ -75,8 +75,9 @@ export default function Jobs() {
   const handleApply = async (jobId) => {
     try {
       await createHire({ jobId });
-      alert("MISSION SYNCHRONIZED: Project assigned to your node.");
-      navigate(user?.role === 'PROFESSIONAL' ? "/dashboard" : "/hires");
+      alert("MISSION SYNCHRONIZED: Project assigned to your node. Check your dashboard.");
+      // Optional: Update local state to reflect application
+      setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'APPLIED' } : j));
     } catch (err) {
       alert("Synchronization Failure: " + err.message);
     }

@@ -1,6 +1,17 @@
 # ProHire Project - Summary of Changes & Synchronization
 
-This document provides a comprehensive overview of all synchronization, configuration, and structural changes made to the ProHire platform to ensure it is production-ready and fully operational.
+This document provides a comprehensive
+
+## Update [2026-04-28]: Core Role-Based Workflow Synchronization
+- **Fix (Security)**: Resolved role name casing mismatch (UPPERCASE vs lowercase) in `App.jsx` which was causing `ProtectedRoute` to redirect valid users back to home/login.
+- **Fix (Professional Profile)**: Implemented auto-creation of `Professional` profile entities in `ProfessionalController` when a user with the `PROFESSIONAL` role logs in for the first time. This resolves 404 errors on the Profile page.
+- **Fix (Messaging)**: Verified messaging backend endpoints. Professionals can now participate in conversations initiated by clients or start them from job cards.
+- **Fix (Deployment)**: Added `vercel.json` to handle SPA routing, preventing 404 errors on direct URL access in the production environment.
+- **Improvement (UX)**: Added success notifications and local state updates when professionals apply for missions on the Jobs board.
+
+## Update [2026-04-27]: ProHire Full-Stack Synchronization & Role-Based Workflow
+
+overview of all synchronization, configuration, and structural changes made to the ProHire platform to ensure it is production-ready and fully operational.
 
 ---
 

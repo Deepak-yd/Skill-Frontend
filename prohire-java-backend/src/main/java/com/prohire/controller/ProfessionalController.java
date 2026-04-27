@@ -41,9 +41,23 @@ public class ProfessionalController {
     public ResponseEntity<Professional> getMyProfessionalProfile() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        
         return professionalRepository.findByUser(user)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> {
+                    // Auto-create profile if user has the role
+                    if ("PROFESSIONAL".equals(user.getRole())) {
+                        Professional pro = new Professional();
+                        pro.setUser(user);
+                        pro.setTitle("Expert Node");
+                        pro.setRateValue(50.0);
+                        pro.setRating(5.0);
+                        pro.setReviewCount(0);
+                        professionalRepository.save(pro);
+                        return ResponseEntity.ok(pro);
+                    }
+                    return ResponseEntity.notFound().build();
+                });
     }
 
     @PutMapping("/{id}")
