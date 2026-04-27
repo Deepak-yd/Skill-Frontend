@@ -22,6 +22,7 @@ public class MessageController {
 
     private final UserRepository userRepository;
 
+<<<<<<< HEAD
     @GetMapping("/conversations")
     public List<User> getConversations() {
         String myEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -34,6 +35,8 @@ public class MessageController {
         return new java.util.ArrayList<>(conversationUsers);
     }
 
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     @GetMapping("/{userId}")
     public List<Message> getMessagesWithUser(@PathVariable Long userId) {
         String myEmail = SecurityContextHolder.getContext().getAuthentication().getName();

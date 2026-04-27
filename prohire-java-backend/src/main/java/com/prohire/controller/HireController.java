@@ -6,8 +6,11 @@ import com.prohire.model.User;
 import com.prohire.repository.HireRepository;
 import com.prohire.repository.ProfessionalRepository;
 import com.prohire.repository.UserRepository;
+<<<<<<< HEAD
 import com.prohire.repository.JobRepository;
 import com.prohire.model.Job;
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +30,11 @@ public class HireController {
 
     private final ProfessionalRepository professionalRepository;
 
+<<<<<<< HEAD
     private final JobRepository jobRepository;
 
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     @GetMapping
     public List<Hire> getAllHires() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -45,6 +51,7 @@ public class HireController {
     }
 
     @PostMapping
+<<<<<<< HEAD
     public ResponseEntity<Hire> createHire(@RequestBody java.util.Map<String, Object> payload) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
@@ -85,6 +92,13 @@ public class HireController {
             hire.setProgress(0);
         }
         
+=======
+    public ResponseEntity<Hire> createHire(@RequestBody Hire hire) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        hire.setClientUser(user);
+        hire.setStatus("PENDING");
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
         hireRepository.save(hire);
         return ResponseEntity.ok(hire);
     }
@@ -96,12 +110,15 @@ public class HireController {
             hire.setStatus(update.getStatus());
         if (update.getAmountValue() != null)
             hire.setAmountValue(update.getAmountValue());
+<<<<<<< HEAD
         if (update.getProgress() != null)
             hire.setProgress(update.getProgress());
         if (update.getNotes() != null)
             hire.setNotes(update.getNotes());
         if (update.getServiceTitle() != null)
             hire.setServiceTitle(update.getServiceTitle());
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 
         hireRepository.save(hire);
         return ResponseEntity.ok(hire);

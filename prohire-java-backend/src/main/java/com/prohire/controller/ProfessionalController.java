@@ -41,6 +41,7 @@ public class ProfessionalController {
     public ResponseEntity<Professional> getMyProfessionalProfile() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+<<<<<<< HEAD
         
         return professionalRepository.findByUser(user)
                 .map(ResponseEntity::ok)
@@ -58,6 +59,11 @@ public class ProfessionalController {
                     }
                     return ResponseEntity.notFound().build();
                 });
+=======
+        return professionalRepository.findByUser(user)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     }
 
     @PutMapping("/{id}")
@@ -105,8 +111,11 @@ public class ProfessionalController {
             service.setPrice(update.getPrice());
         if (update.getPriceLabel() != null)
             service.setPriceLabel(update.getPriceLabel());
+<<<<<<< HEAD
         if (update.getDuration() != null)
             service.setDuration(update.getDuration());
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 
         serviceRepository.save(service);
         return ResponseEntity.ok(service);

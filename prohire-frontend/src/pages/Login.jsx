@@ -31,7 +31,11 @@ function Login() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+=======
+    <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-slate-950">
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
       
       {/* Dynamic Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse"></div>
@@ -46,7 +50,11 @@ function Login() {
               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-indigo-400">Secure Access</span>
            </div>
            
+<<<<<<< HEAD
            <h1 className="text-6xl font-black italic tracking-tighter leading-none uppercase">
+=======
+           <h1 className="text-6xl font-black text-white italic tracking-tighter leading-none uppercase">
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
               Pro<span className="text-indigo-500">Hire</span> <br />
               Login
            </h1>
@@ -58,9 +66,15 @@ function Login() {
 
         {/* Right Side: Login Form */}
         <div className="w-full max-w-[380px] mx-auto animate-reveal">
+<<<<<<< HEAD
            <div className="glass-panel p-8 rounded-[2.5rem] relative group shadow-2xl">
               <div className="mb-8 text-center lg:text-left">
                  <h2 className="text-3xl font-black italic uppercase tracking-tighter mb-1">Sign In</h2>
+=======
+           <div className="premium-glass p-8 rounded-[2.5rem] relative group border border-white/10 shadow-2xl">
+              <div className="mb-8 text-center lg:text-left">
+                 <h2 className="text-3xl font-black italic text-white uppercase tracking-tighter mb-1">Sign In</h2>
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                  <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic leading-none">Access your account</p>
               </div>
 
@@ -79,7 +93,11 @@ function Login() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+<<<<<<< HEAD
                           className="form-input w-full rounded-xl px-6 py-4 text-sm font-black italic tracking-tight focus:ring-2 ring-indigo-500/20 outline-none transition-all placeholder:opacity-50"
+=======
+                          className="input-premium w-full bg-white/5 border-white/5 rounded-xl px-6 py-4 text-sm font-black italic tracking-tight focus:ring-2 ring-indigo-500/20 outline-none transition-all placeholder:text-slate-800"
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                           placeholder="e.g. alex@prohire.com"
                        />
                     </div>
@@ -90,7 +108,11 @@ function Login() {
                           required
                           value={formData.password}
                           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+<<<<<<< HEAD
                           className="form-input w-full rounded-xl px-6 py-4 text-sm font-black italic tracking-tight focus:ring-2 ring-indigo-500/20 outline-none transition-all placeholder:opacity-50"
+=======
+                          className="input-premium w-full bg-white/5 border-white/5 rounded-xl px-6 py-4 text-sm font-black italic tracking-tight focus:ring-2 ring-indigo-500/20 outline-none transition-all placeholder:text-slate-800"
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                           placeholder="••••••••"
                        />
                     </div>
@@ -126,7 +148,11 @@ function Login() {
 
               <div className="mt-8 pt-6 border-t border-white/5 text-center">
                  <p className="text-[8.5px] font-black text-slate-600 uppercase tracking-[0.3em] italic mb-4">Don't have an account?</p>
+<<<<<<< HEAD
                  <Link to="/register" className="inline-block px-8 py-3 rounded-lg border border-white/5 hover:border-indigo-500 text-[8.5px] font-black uppercase tracking-[0.4em] italic transition-all hover:bg-indigo-600/5">
+=======
+                 <Link to="/register" className="inline-block px-8 py-3 rounded-lg border border-white/5 hover:border-indigo-500 text-[8.5px] font-black text-white uppercase tracking-[0.4em] italic transition-all hover:bg-indigo-600/5">
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                     Create Account
                  </Link>
               </div>

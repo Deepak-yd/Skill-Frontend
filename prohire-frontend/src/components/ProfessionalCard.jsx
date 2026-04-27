@@ -93,6 +93,7 @@ function ProfessionalCard({ pro }) {
          </div>
          
          <div className="flex gap-4 items-center">
+<<<<<<< HEAD
             {(user?.role?.toLowerCase() === "user" || user?.role?.toLowerCase() === "admin") && (
               <>
                 <button 
@@ -103,6 +104,11 @@ function ProfessionalCard({ pro }) {
                 </button>
                 <button onClick={handleHire} className="px-10 py-3.5 bg-indigo-600 text-white rounded-[1.25rem] text-[9.5px] font-black uppercase tracking-[0.4em] shadow-xl hover:bg-white hover:text-slate-950 transition-all italic active:scale-95 leading-none">Engage Sync</button>
               </>
+=======
+            <button onClick={handleContact} className="text-[9px] font-black uppercase text-slate-500 hover:text-white transition-all underline underline-offset-8 decoration-white/5 italic">Dossier</button>
+            {(user?.role === "user" || user?.role === "admin") && (
+              <button onClick={handleHire} className="px-10 py-3.5 bg-indigo-600 text-white rounded-[1.25rem] text-[9.5px] font-black uppercase tracking-[0.4em] shadow-xl hover:bg-white hover:text-slate-950 transition-all italic active:scale-95 leading-none">Engage Sync</button>
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
             )}
          </div>
       </div>

@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
     ? "http://localhost:8080/api" 
     : "https://skill-project-fsad-ic4y.onrender.com/api");
+=======
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 
 function toCurrency(value) {
   return `$${Number(value || 0).toFixed(0)}`;
@@ -40,6 +44,7 @@ function shapeUser(user) {
 
 function shapeProfessional(pro) {
   if (!pro) return null;
+<<<<<<< HEAD
   
   const categoryName = typeof pro.category === 'object' && pro.category !== null 
     ? pro.category.name 
@@ -54,6 +59,14 @@ function shapeProfessional(pro) {
     bio: pro.user?.profile?.bio || pro.bio || '',
     categoryId: pro.category?.id ? String(pro.category.id) : null,
     category: categoryName,
+=======
+  return {
+    ...pro,
+    id: String(pro.id),
+    userId: String(pro.userId || ''),
+    categoryId: pro.categoryId ? String(pro.categoryId) : null,
+    category: pro.category || 'Uncategorized',
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     rate: typeof pro.rate === 'string' ? pro.rate : toCurrency(pro.rateValue ?? pro.rate),
     skills: Array.isArray(pro.skills) ? pro.skills : [],
     reviewCount: Number(pro.reviewCount || 0),
@@ -65,7 +78,10 @@ function shapeService(service) {
     ...service,
     id: String(service.id),
     professionalId: String(service.professionalId),
+<<<<<<< HEAD
     title: service.name || service.title || 'Untitled',
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     price: Number(service.price || 0),
     priceLabel: service.priceLabel || toCurrency(service.price),
   };
@@ -247,19 +263,31 @@ export async function fetchServices(professionalId) {
 }
 
 export async function createService(professionalId, data) {
+<<<<<<< HEAD
   const payload = { ...data, name: data.title || data.name };
   const service = await request(`/professionals/${professionalId}/services`, {
     method: 'POST',
     body: JSON.stringify(payload),
+=======
+  const service = await request(`/professionals/${professionalId}/services`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
   });
   return shapeService(service);
 }
 
 export async function updateService(professionalId, serviceId, data) {
+<<<<<<< HEAD
   const payload = { ...data, name: data.title || data.name };
   const service = await request(`/professionals/${professionalId}/services/${serviceId}`, {
     method: 'PUT',
     body: JSON.stringify(payload),
+=======
+  const service = await request(`/professionals/${professionalId}/services/${serviceId}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
   });
   return shapeService(service);
 }
@@ -275,8 +303,12 @@ export async function fetchHires() {
 }
 
 export async function createHire(data) {
+<<<<<<< HEAD
   const payload = { ...data, amountValue: data.amount || data.amountValue };
   const hire = await request('/hires', { method: 'POST', body: JSON.stringify(payload) });
+=======
+  const hire = await request('/hires', { method: 'POST', body: JSON.stringify(data) });
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
   return shapeHire(hire);
 }
 
@@ -330,10 +362,13 @@ export async function deleteJob(jobId) {
 }
 
 // MESSAGES
+<<<<<<< HEAD
 export async function fetchConversations() {
   return request('/messages/conversations');
 }
 
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 export async function fetchMessages(userId) {
   return request(`/messages/${userId}`);
 }

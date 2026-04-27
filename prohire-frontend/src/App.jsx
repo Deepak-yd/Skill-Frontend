@@ -13,9 +13,12 @@ import Register from "./pages/Register";
 import AdminPanel from "./pages/AdminPanel";
 import Connections from "./pages/Connections";
 import Jobs from "./pages/Jobs";
+<<<<<<< HEAD
 import Settings from "./pages/Settings";
 import Support from "./pages/Support";
 import Messages from "./pages/Messages";
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
 
 function App() {
   return (
@@ -58,7 +61,11 @@ function App() {
           <Route
             path="/connections"
             element={
+<<<<<<< HEAD
             <ProtectedRoute role={["USER", "PROFESSIONAL"]}>
+=======
+            <ProtectedRoute role={["user", "professional"]}>
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
               <Connections />
             </ProtectedRoute>
             }
@@ -76,11 +83,16 @@ function App() {
           <Route
             path="/admin"
             element={
+<<<<<<< HEAD
             <ProtectedRoute role={["ADMIN"]}>
+=======
+            <ProtectedRoute role={["admin"]}>
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
               <AdminPanel />
             </ProtectedRoute>
             }
           />
+<<<<<<< HEAD
            <Route
             path="/settings"
             element={
@@ -105,6 +117,8 @@ function App() {
             </ProtectedRoute>
             }
           />
+=======
+>>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
         </Routes>
       </Layout>
     </BrowserRouter>
