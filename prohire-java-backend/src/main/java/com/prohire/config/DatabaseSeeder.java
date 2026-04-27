@@ -42,20 +42,21 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
     public void run(String... args) throws Exception {
         System.out.println("🚀 Initializing Fresh ProHire Database Seed Protocol...");
 
         // 0. CLEAR EXISTING DATA (In correct order to avoid FK violations)
-        hireRepository.deleteAll();
-        messageRepository.deleteAll();
-        connectionRepository.deleteAll();
-        serviceRepository.deleteAll();
-        jobRepository.deleteAll();
-        professionalRepository.deleteAll();
-        shareRepository.deleteAll();
-        platformSettingRepository.deleteAll();
-        userRepository.deleteAll();
-        categoryRepository.deleteAll();
+        hireRepository.deleteAllInBatch();
+        messageRepository.deleteAllInBatch();
+        connectionRepository.deleteAllInBatch();
+        serviceRepository.deleteAllInBatch();
+        jobRepository.deleteAllInBatch();
+        professionalRepository.deleteAllInBatch();
+        shareRepository.deleteAllInBatch();
+        platformSettingRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
+        categoryRepository.deleteAllInBatch();
 
         String encodedPassword = passwordEncoder.encode("password123");
 
