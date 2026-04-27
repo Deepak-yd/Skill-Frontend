@@ -50,7 +50,9 @@ export default function Professionals() {
     return pros.filter(p => {
       const matchesSearch = p.name?.toLowerCase().includes(search.toLowerCase()) || 
                           p.title?.toLowerCase().includes(search.toLowerCase());
-      const matchesCat = selectedCategory === "all" || p.category === selectedCategory || p.Category?.name === selectedCategory;
+      const matchesCat = selectedCategory === "all" || 
+                        p.category?.includes(selectedCategory) || 
+                        p.Category?.name?.includes(selectedCategory);
       return matchesSearch && matchesCat;
     });
   }, [pros, search, selectedCategory]);
@@ -97,15 +99,15 @@ export default function Professionals() {
                >
                  All_Sectors
                </button>
-               {['Web', 'Design', 'AI/ML'].map(catName => (
-                 <button 
-                   key={catName} 
-                   onClick={() => setSelectedCategory(catName)} 
-                   className={`px-8 py-3 rounded-full text-[9px] font-black uppercase tracking-[0.3em] italic transition-all ${selectedCategory === catName ? 'bg-indigo-600 text-white shadow-xl' : 'text-slate-500 hover:text-white'}`}
-                 >
-                   {catName}
-                 </button>
-               ))}
+                 {categories.slice(0, 6).map(cat => (
+                   <button 
+                     key={cat.id} 
+                     onClick={() => setSelectedCategory(cat.name)} 
+                     className={`px-8 py-3 rounded-full text-[9px] font-black uppercase tracking-[0.3em] italic whitespace-nowrap transition-all ${selectedCategory === cat.name ? 'bg-indigo-600 text-white shadow-xl' : 'text-slate-500 hover:text-white'}`}
+                   >
+                     {cat.name}
+                   </button>
+                ))}
            </div>
 
            {user?.role === "USER" && (
@@ -160,7 +162,7 @@ export default function Professionals() {
                             </div>
                             <h4 className="text-2xl font-black tracking-tight uppercase italic leading-tight line-clamp-2">{job.title}</h4>
                          </div>
-                         <p className="text-3xl font-black italic text-emerald-500">${job.budget}</p>
+                         <p className="text-3xl font-black italic text-emerald-500">{job.budget}</p>
                       </div>
                       <p className="text-slate-500 text-sm font-bold leading-relaxed line-clamp-3 italic opacity-70 border-l-[2px] border-white/5 pl-6">{job.description}</p>
                    </div>

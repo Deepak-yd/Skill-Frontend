@@ -17,6 +17,7 @@ import com.prohire.repository.MessageRepository;
 import com.prohire.repository.ConnectionRepository;
 import com.prohire.repository.ShareRepository;
 import com.prohire.repository.PlatformSettingRepository;
+import com.prohire.repository.ProfileRepository;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +40,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final ConnectionRepository connectionRepository;
     private final ShareRepository shareRepository;
     private final PlatformSettingRepository platformSettingRepository;
+    private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -55,6 +57,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         professionalRepository.deleteAllInBatch();
         shareRepository.deleteAllInBatch();
         platformSettingRepository.deleteAllInBatch();
+        profileRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
         categoryRepository.deleteAllInBatch();
 

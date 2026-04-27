@@ -137,7 +137,7 @@ function MyHires() {
                       >
                          Expert Profile
                       </button>
-                      {user?.role !== "professional" && hire.status !== "Completed" && (
+                      {user?.role !== "PROFESSIONAL" && hire.status !== "Completed" && (
                          <button
                            onClick={() => handleComplete(hire)}
                            className="flex-1 sm:px-12 py-3.5 bg-emerald-600 text-white rounded-xl text-[8px] font-black uppercase tracking-[0.5em] shadow-2xl active:scale-95 italic hover:bg-slate-950 transition-all leading-none"

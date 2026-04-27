@@ -40,6 +40,7 @@ function Profile() {
     title: "",
     hourlyRate: 0,
     skills: "",
+    categoryId: "",
   });
   const [isEditing, setIsEditing] = useState(false);
 
@@ -100,6 +101,7 @@ function Profile() {
             bio: pro.bio || prev.bio,
             hourlyRate: Number(String(pro.rate).replace(/[^0-9]/g, "")) || 0,
             skills: (pro.skills || []).join(", "),
+            categoryId: pro.categoryId || "",
           }));
         }
       } catch (err) {
@@ -139,6 +141,7 @@ function Profile() {
             .split(",")
             .map((s) => s.trim())
             .filter(Boolean),
+          category: profileForm.categoryId ? { id: Number(profileForm.categoryId) } : null,
         });
         const refreshed = await fetchMyProfessionalProfile();
         setMyProfessional(refreshed);
@@ -278,6 +281,25 @@ function Profile() {
                          </div>
                       </div>
                     ))}
+                    
+                    {user?.role === 'PROFESSIONAL' && (
+                       <div className="pt-8 border-t border-white/5 mt-8">
+                          <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Primary Sector</label>
+                          <select
+                             disabled={!isEditing}
+                             value={profileForm.categoryId}
+                             onChange={(e) => setProfileForm(f => ({...f, categoryId: e.target.value}))}
+                             className={`w-full bg-slate-900/80 border rounded-2xl px-6 py-4 text-sm font-bold transition-all focus:outline-none appearance-none ${
+                               isEditing ? "border-indigo-500/50 text-white" : "border-white/5 text-slate-400"
+                             }`}
+                          >
+                             <option value="">Uncategorized</option>
+                             {categories.map(cat => (
+                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                             ))}
+                          </select>
+                       </div>
+                    )}
                  </div>
 
                  <div className="glass-panel p-10 bg-slate-900/40">

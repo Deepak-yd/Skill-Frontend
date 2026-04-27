@@ -37,10 +37,13 @@ public class ConnectionController {
     }
 
     @GetMapping("/friends")
-    public List<Connection> getFriends() {
+    public List<User> getFriends() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
-        return connectionRepository.findBySenderOrReceiverAndStatus(user, user, "ACCEPTED");
+        List<Connection> connections = connectionRepository.findFriends(user, user, "ACCEPTED");
+        return connections.stream()
+                .map(c -> c.getSender().getId().equals(user.getId()) ? c.getReceiver() : c.getSender())
+                .toList();
     }
 
     @PostMapping

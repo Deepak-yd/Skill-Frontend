@@ -7,6 +7,9 @@ import {
   fetchProfessionals,
   fetchReports,
   fetchUsers,
+  fetchCategories,
+  createCategory,
+  deleteCategory,
   updatePlatformSettings,
   updateUser,
 } from "../api";
@@ -16,6 +19,7 @@ import PageHeader from "../components/PageHeader";
 const tabs = [
   { id: "dashboard", label: "Dashboard", icon: "📊" },
   { id: "users", label: "Users", icon: "👥" },
+  { id: "categories", label: "Categories", icon: "🏷️" },
   { id: "reports", label: "Reports", icon: "📈" },
   { id: "settings", label: "Settings", icon: "⚙️" },
 ];
@@ -25,6 +29,7 @@ function AdminPanel() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [metrics, setMetrics] = useState(null);
   const [users, setUsers] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [reports, setReports] = useState(null);
   const [settings, setSettings] = useState({ platformName: "", commissionRate: 0 });
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +43,7 @@ function AdminPanel() {
         setIsLoading(true);
         if (activeTab === "dashboard") setMetrics(await fetchDashboardMetrics());
         if (activeTab === "users") setUsers(await fetchUsers());
+        if (activeTab === "categories") setCategories(await fetchCategories());
         if (activeTab === "reports") setReports(await fetchReports());
         if (activeTab === "settings") setSettings(await fetchPlatformSettings());
       } catch (err) {
@@ -58,6 +64,20 @@ function AdminPanel() {
       await createUser(newUser);
       setNewUser({ name: "", email: "", password: "", role: "user" });
       setUsers(await fetchUsers());
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setIsCreating(false);
+    }
+  };
+  const [newCat, setNewCat] = useState({ name: "", description: "" });
+  const handleCreateCategory = async (e) => {
+    e.preventDefault();
+    try {
+      setIsCreating(true);
+      await createCategory(newCat);
+      setNewCat({ name: "", description: "" });
+      setCategories(await fetchCategories());
     } catch (err) {
       alert(err.message);
     } finally {
@@ -323,7 +343,7 @@ function AdminPanel() {
                            </div>
                         </td>
                         <td className="px-10 py-8">
-                           <span className={`px-4 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-[0.3em] italic border ${u.role === 'admin' ? 'bg-slate-950 text-white border-slate-950' : 'bg-indigo-50 text-indigo-600 border-indigo-100'}`}>{u.role}</span>
+                           <span className={`px-4 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-[0.3em] italic border ${u.role === 'ADMIN' ? 'bg-slate-950 text-white border-slate-950' : 'bg-indigo-50 text-indigo-600 border-indigo-100'}`}>{u.role}</span>
                         </td>
                         <td className="px-10 py-8 text-center">
                            <div className="flex flex-col items-center gap-2">
@@ -342,6 +362,40 @@ function AdminPanel() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* 🌙 CATEGORY MANAGEMENT */}
+        {activeTab === "categories" && (
+          <div className="space-y-12 animate-reveal">
+            <form onSubmit={handleCreateCategory} className="premium-glass p-8 bg-white border-slate-100 flex flex-wrap lg:flex-nowrap gap-6 items-end shadow-xl rounded-[2.5rem] border-[2px]">
+              <div className="flex-1 min-w-[300px] space-y-3">
+                 <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] italic px-1">Category Name</label>
+                 <input value={newCat.name} onChange={(e) => setNewCat((p) => ({ ...p, name: e.target.value }))} placeholder="e.g. Cybersecurity" className="form-input py-4 bg-slate-50 border-slate-50 italic text-sm" required />
+              </div>
+              <div className="flex-[2] min-w-[300px] space-y-3">
+                 <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] italic px-1">Description</label>
+                 <input value={newCat.description} onChange={(e) => setNewCat((p) => ({ ...p, description: e.target.value }))} placeholder="Expert security and ethical hacking services." className="form-input py-4 bg-slate-50 border-slate-50 italic text-sm" required />
+              </div>
+              <button type="submit" disabled={isCreating} className="px-10 py-5 bg-slate-950 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.3em] shadow-xl hover:bg-indigo-600 transition-all italic h-[52px] disabled:opacity-50">
+                 {isCreating ? "Manifesting..." : "Add Sector"}
+              </button>
+            </form>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+               {categories.map((cat) => (
+                 <div key={cat.id} className="premium-glass p-8 bg-white border-slate-100 shadow-xl rounded-[2.5rem] relative group border-[1.5px] hover:border-indigo-600/30 transition-all">
+                    <div className="flex justify-between items-start mb-6">
+                       <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-black italic">{cat.name?.[0]}</div>
+                       <button onClick={() => deleteCategory(cat.id).then(() => fetchCategories().then(setCategories))} className="p-2 text-slate-300 hover:text-pink-600 transition-colors">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                       </button>
+                    </div>
+                    <h4 className="text-xl font-black italic uppercase tracking-tighter text-slate-950 mb-2 truncate">{cat.name}</h4>
+                    <p className="text-[10px] text-slate-400 font-bold leading-relaxed line-clamp-2 italic">{cat.description || 'Verified node sector in the platform grid.'}</p>
+                 </div>
+               ))}
             </div>
           </div>
         )}
