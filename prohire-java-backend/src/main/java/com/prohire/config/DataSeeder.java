@@ -47,8 +47,15 @@ public class DataSeeder implements CommandLineRunner {
         List<String> categoryNames = Arrays.asList("Web Development", "AI/ML Engineering", "Cybersecurity", "Business Analysis", "Design", "Marketing");
         Map<String, Category> categoryMap = new HashMap<>();
         for (String name : categoryNames) {
-            Category cat = Category.builder().name(name).icon("code").description("Professional " + name + " services").build();
-            categoryMap.put(name, categoryRepository.save(cat));
+            Category cat = categoryRepository.findByName(name)
+                .orElseGet(() -> categoryRepository.save(
+                    Category.builder()
+                        .name(name)
+                        .icon("code")
+                        .description("Professional " + name + " services")
+                        .build()
+                ));
+            categoryMap.put(name, cat);
         }
 
         // 2. Professionals & Services
@@ -90,13 +97,15 @@ public class DataSeeder implements CommandLineRunner {
         settingRepository.save(PlatformSetting.builder().settingKey("maintenance_mode").settingValue("false").build());
 
         // 9. Admin
-        User admin = User.builder()
-                .email("admin@prohire.app")
-                .password(passwordEncoder.encode("admin123"))
-                .fullName("System Administrator")
-                .role("ADMIN")
-                .build();
-        userRepository.save(admin);
+        if (userRepository.findByEmail("admin@prohire.app").isEmpty()) {
+            User admin = User.builder()
+                    .email("admin@prohire.app")
+                    .password(passwordEncoder.encode("admin123"))
+                    .fullName("System Administrator")
+                    .role("ADMIN")
+                    .build();
+            userRepository.save(admin);
+        }
 
         System.out.println("Comprehensive ProHire Seed Protocol Complete.");
     }
