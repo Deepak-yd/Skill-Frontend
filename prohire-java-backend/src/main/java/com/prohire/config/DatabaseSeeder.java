@@ -31,22 +31,22 @@ public class DatabaseSeeder implements CommandLineRunner {
         System.out.println("Seeding database with initial data...");
 
         // Users
-        User admin = User.builder().email("admin@prohire.com").password(passwordEncoder.encode("password")).fullName("Admin Overseer").role("ADMIN").isEmailVerified(true).build();
+        User admin = User.builder().email("admin@klu.in").password(passwordEncoder.encode("password")).fullName("Admin Overseer").role("ADMIN").isEmailVerified(true).build();
         Profile adminProfile = Profile.builder().user(admin).avatar("https://i.pravatar.cc/150?u=admin").bio("System Administrator").build();
         admin.setProfile(adminProfile);
         userRepository.save(admin);
 
-        User client = User.builder().email("client@company.com").password(passwordEncoder.encode("password")).fullName("Sarah Connor").role("USER").isEmailVerified(true).build();
+        User client = User.builder().email("client@klu.in").password(passwordEncoder.encode("password")).fullName("Sarah Connor").role("USER").isEmailVerified(true).build();
         Profile clientProfile = Profile.builder().user(client).avatar("https://i.pravatar.cc/150?u=client").bio("Cyberdyne Systems Director").company("Cyberdyne").location("Los Angeles").build();
         client.setProfile(clientProfile);
         userRepository.save(client);
 
-        User pro1User = User.builder().email("pro1@expert.com").password(passwordEncoder.encode("password")).fullName("Alex Vance").role("PROFESSIONAL").isEmailVerified(true).build();
+        User pro1User = User.builder().email("pro1@klu.in").password(passwordEncoder.encode("password")).fullName("Alex Vance").role("PROFESSIONAL").isEmailVerified(true).build();
         Profile pro1Profile = Profile.builder().user(pro1User).avatar("https://i.pravatar.cc/150?u=pro1").bio("Senior Full-Stack Engineer with 10 years experience").location("San Francisco").website("https://alexvance.dev").github("alexv").build();
         pro1User.setProfile(pro1Profile);
         userRepository.save(pro1User);
 
-        User pro2User = User.builder().email("pro2@expert.com").password(passwordEncoder.encode("password")).fullName("Elena Fisher").role("PROFESSIONAL").isEmailVerified(true).build();
+        User pro2User = User.builder().email("pro2@klu.in").password(passwordEncoder.encode("password")).fullName("Elena Fisher").role("PROFESSIONAL").isEmailVerified(true).build();
         Profile pro2Profile = Profile.builder().user(pro2User).avatar("https://i.pravatar.cc/150?u=pro2").bio("Lead UI/UX Designer and Frontend Specialist").location("London").twitter("@elenadesigns").build();
         pro2User.setProfile(pro2Profile);
         userRepository.save(pro2User);
