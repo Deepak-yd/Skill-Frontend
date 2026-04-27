@@ -4,7 +4,7 @@ import { fetchHires, fetchDashboardMetrics } from "../api";
 import PageHeader from "../components/PageHeader";
 import ShareComponent from "../components/ShareComponent";
 
-export default function UserDashboard({ user }) {
+export default function UserDashboard() {
   const navigate = useNavigate();
   const [hires, setHires] = useState([]);
   const [metrics, setMetrics] = useState(null);

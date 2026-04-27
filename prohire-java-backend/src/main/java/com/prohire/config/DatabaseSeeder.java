@@ -1,7 +1,18 @@
 package com.prohire.config;
 
-import com.prohire.model.*;
-import com.prohire.repository.*;
+import com.prohire.model.User;
+import com.prohire.model.Profile;
+import com.prohire.model.Category;
+import com.prohire.model.Professional;
+import com.prohire.model.Service;
+import com.prohire.model.Job;
+import com.prohire.model.Hire;
+import com.prohire.repository.UserRepository;
+import com.prohire.repository.ProfessionalRepository;
+import com.prohire.repository.JobRepository;
+import com.prohire.repository.CategoryRepository;
+import com.prohire.repository.ServiceRepository;
+import com.prohire.repository.HireRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
