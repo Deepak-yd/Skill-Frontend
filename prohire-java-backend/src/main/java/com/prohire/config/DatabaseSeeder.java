@@ -13,6 +13,10 @@ import com.prohire.repository.JobRepository;
 import com.prohire.repository.CategoryRepository;
 import com.prohire.repository.ServiceRepository;
 import com.prohire.repository.HireRepository;
+import com.prohire.repository.MessageRepository;
+import com.prohire.repository.ConnectionRepository;
+import com.prohire.repository.ShareRepository;
+import com.prohire.repository.PlatformSettingRepository;
 import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,19 +35,27 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ServiceRepository serviceRepository;
     private final HireRepository hireRepository;
+    private final MessageRepository messageRepository;
+    private final ConnectionRepository connectionRepository;
+    private final ShareRepository shareRepository;
+    private final PlatformSettingRepository platformSettingRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("🚀 Initializing Fresh ProHire Database Seed Protocol...");
 
-        // 0. CLEAR EXISTING DATA
+        // 0. CLEAR EXISTING DATA (In correct order to avoid FK violations)
         hireRepository.deleteAll();
+        messageRepository.deleteAll();
+        connectionRepository.deleteAll();
         serviceRepository.deleteAll();
         jobRepository.deleteAll();
         professionalRepository.deleteAll();
-        categoryRepository.deleteAll();
+        shareRepository.deleteAll();
+        platformSettingRepository.deleteAll();
         userRepository.deleteAll();
+        categoryRepository.deleteAll();
 
         String encodedPassword = passwordEncoder.encode("password123");
 
