@@ -29,7 +29,6 @@ public class Hire {
 
     private Double amountValue;
     
-<<<<<<< HEAD
     private String serviceTitle;
     
     @Column(columnDefinition = "TEXT")
@@ -37,8 +36,6 @@ public class Hire {
     
     private Integer progress;
     
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     private String status; // PENDING, ONGOING, COMPLETED, CANCELLED
 
     private LocalDateTime createdAt;

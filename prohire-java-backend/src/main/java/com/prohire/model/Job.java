@@ -29,7 +29,6 @@ public class Job {
     private String type; // FULL_TIME, PART_TIME, CONTRACT
     private Double budget;
     
-<<<<<<< HEAD
     private String category;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -37,8 +36,6 @@ public class Job {
     @Column(name = "skill")
     private java.util.List<String> skills;
 
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     private String status; // OPEN, CLOSED
 
     private LocalDateTime createdAt;

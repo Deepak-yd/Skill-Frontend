@@ -18,7 +18,6 @@ function Navbar() {
 
   const navItems = useMemo(() => {
     if (!token) return [{ to: "/", label: "Home" }];
-<<<<<<< HEAD
     
     const items = [
       { to: "/dashboard", label: "Dashboard" }
@@ -43,24 +42,6 @@ function Navbar() {
     );
     
     return items;
-=======
-    const base = [
-      { to: "/", label: "Home" },
-      { to: "/dashboard", label: "Dashboard" },
-      { to: "/jobs", label: "Jobs" },
-    ];
-    const dynamic = [];
-    if (user?.role === "admin") dynamic.push({ to: "/admin", label: "Admin" });
-    else if (user?.role === "user") { 
-      dynamic.push({ to: "/connections", label: "Connections" }); 
-      dynamic.push({ to: "/professionals", label: "Professionals" }); 
-      dynamic.push({ to: "/hires", label: "Hires" });
-    } else if (user?.role === "professional") {
-      dynamic.push({ to: "/connections", label: "Connections" }); 
-      dynamic.push({ to: "/professionals", label: "Professionals" }); 
-    }
-    return [...base, ...dynamic];
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
   }, [token, user?.role]);
 
   const handleLogout = () => {
@@ -134,24 +115,12 @@ function Navbar() {
                 
                 {isUserMenuOpen && (
                   <div className="absolute right-0 mt-8 w-72 glass-panel border-white/5 p-8 z-[200] animate-reveal shadow-2xl rounded-[2.5rem] border-[2px]">
-<<<<<<< HEAD
                     <div className="mb-6 border-b border-white/5 pb-6">
-=======
-                    <div className="mb-8 border-b border-white/5 pb-8">
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.5em] mb-2 leading-none italic">Neural Peer Verified</p>
                        <p className="text-lg font-black tracking-tight uppercase leading-none italic truncate">{user?.name}</p>
                        <p className="text-[10px] text-indigo-500 font-black font-mono tracking-widest mt-2 truncate opacity-60">{user?.email}</p>
                     </div>
-<<<<<<< HEAD
                     <div>
-=======
-                    <div className="space-y-1">
-                       <button onClick={() => {navigate("/profile"); setIsUserMenuOpen(false);}} className="w-full text-left px-4 py-3.5 text-[9px] text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition font-black uppercase tracking-[0.3em] italic">Profile Configuration</button>
-                       <button onClick={() => {navigate("/dashboard"); setIsUserMenuOpen(false);}} className="w-full text-left px-4 py-3.5 text-[9px] text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition font-black uppercase tracking-[0.3em] italic">Operations Center</button>
-                    </div>
-                    <div className="mt-8 pt-8 border-t border-white/5">
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                        <button onClick={handleLogout} className="w-full text-center py-4 text-[10px] text-pink-600 font-black uppercase tracking-[0.4em] hover:bg-pink-600/10 rounded-xl transition border border-pink-500/20 italic">Sign Out</button>
                     </div>
                   </div>

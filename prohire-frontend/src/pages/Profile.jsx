@@ -161,20 +161,14 @@ function Profile() {
           title: serviceForm.title,
           description: serviceForm.description,
           price: Number(serviceForm.price || 0),
-<<<<<<< HEAD
           duration: serviceForm.duration,
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
         });
       } else {
         await createService(myProfessional.id, {
           title: serviceForm.title,
           description: serviceForm.description,
           price: Number(serviceForm.price || 0),
-<<<<<<< HEAD
           duration: serviceForm.duration,
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
         });
       }
 
@@ -260,7 +254,6 @@ function Profile() {
                     <h3 className="text-[10px] font-black text-slate-700 uppercase tracking-[0.4em]">Primary Metadata</h3>
                     {[
                       { key: "location", label: "Operational Hub", icon: "📍" },
-<<<<<<< HEAD
                       { key: "phone", label: "Comms Link", icon: "📱" },
                       { key: "company", label: "Affiliation", icon: "🏢" },
                       { key: "website", label: "External Nexus", icon: "🌐" },
@@ -269,11 +262,6 @@ function Profile() {
                       { key: "github", label: "Code Repository", icon: "📂" },
                       { key: "twitter", label: "Broadcast Channel", icon: "🐦" },
                       { key: "portfolio", label: "Asset Vault", icon: "🎨" },
-=======
-                      { key: "website", label: "External Nexus", icon: "🌐" },
-                      { key: "linkedIn", label: "Neural Network", icon: "🔗" },
-                      { key: "github", label: "Code Repository", icon: "📂" },
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                     ].map(field => (
                       <div key={field.key}>
                          <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3">{field.label}</label>
@@ -370,7 +358,6 @@ function Profile() {
                             className="form-input"
                             required
                           />
-<<<<<<< HEAD
                           <input
                             value={serviceForm.duration || ''}
                             onChange={(e) => setServiceForm(s => ({...s, duration: e.target.value}))}
@@ -378,8 +365,6 @@ function Profile() {
                             className="form-input sm:col-span-2"
                             required
                           />
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                        </div>
                        <input
                          value={serviceForm.description}
@@ -404,11 +389,7 @@ function Profile() {
                                 <p className="text-indigo-400 font-black text-xl italic">{s.priceLabel}</p>
                                 {canManageServices && (
                                    <div className="flex gap-4">
-<<<<<<< HEAD
                                       <button onClick={() => setServiceForm({ id: s.id, title: s.title, description: s.description, price: s.price, duration: s.duration })} className="text-[8px] font-black uppercase text-indigo-500 hover:text-white transition">Modify</button>
-=======
-                                      <button onClick={() => setServiceForm({ id: s.id, title: s.title, description: s.description, price: s.price })} className="text-[8px] font-black uppercase text-indigo-500 hover:text-white transition">Modify</button>
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                                       <button onClick={() => handleDeleteService(s.id)} className="text-[8px] font-black uppercase text-pink-500 hover:text-white transition">Sever</button>
                                    </div>
                                 )}
@@ -438,7 +419,6 @@ function Profile() {
                         </div>
                     </div>
                     {user?.role === 'PROFESSIONAL' && (
-<<<<<<< HEAD
                        <>
                           <div>
                               <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Professional Title</p>
@@ -465,12 +445,6 @@ function Profile() {
                               )}
                           </div>
                        </>
-=======
-                       <div>
-                          <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-3">Financial Allocation</p>
-                          <p className="text-4xl font-black text-white tracking-tighter">${profileForm.hourlyRate}<span className="text-xs text-slate-600 font-black uppercase ml-1 italic">/per hr</span></p>
-                       </div>
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                     )}
                     <div className="pt-8 border-t border-white/5">
                        <p className="text-[10px] text-slate-700 font-black uppercase tracking-widest mb-4">Neural Strength</p>

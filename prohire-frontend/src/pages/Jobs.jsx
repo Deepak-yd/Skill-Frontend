@@ -75,14 +75,9 @@ export default function Jobs() {
   const handleApply = async (jobId) => {
     try {
       await createHire({ jobId });
-<<<<<<< HEAD
       alert("MISSION SYNCHRONIZED: Project assigned to your node. Check your dashboard.");
       // Optional: Update local state to reflect application
       setJobs(prev => prev.map(j => j.id === jobId ? { ...j, status: 'APPLIED' } : j));
-=======
-      alert("MISSION SYNCHRONIZED: Project assigned to your node.");
-      navigate(user?.role === 'PROFESSIONAL' ? "/dashboard" : "/hires");
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
     } catch (err) {
       alert("Synchronization Failure: " + err.message);
     }
@@ -176,7 +171,6 @@ export default function Jobs() {
                         </div>
                     </div>
 
-<<<<<<< HEAD
                     <div className="grid md:grid-cols-2 gap-10">
                         <div className="space-y-4">
                             <label className="block text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic px-1 pl-4 border-l-[3px] border-indigo-600">Location</label>
@@ -207,8 +201,6 @@ export default function Jobs() {
                         </div>
                     </div>
 
-=======
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                     <div className="space-y-4">
                         <label className="block text-[9px] font-black text-slate-500 uppercase tracking-[0.4em] italic px-1 pl-4 border-l-[3px] border-indigo-600">Description</label>
                         <textarea 
@@ -280,17 +272,12 @@ export default function Jobs() {
                   </div>
                   
                   <div className="flex items-center gap-4">
-<<<<<<< HEAD
                     {(user?.id === (job.poster?.id || job.userId) || user?.role === "ADMIN") ? (
-=======
-                    {(user?.id === job.userId || user?.role === "ADMIN") ? (
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                       <div className="flex gap-4">
                         <button onClick={() => { setEditingJob(job); setFormData(job); setShowForm(true); }} className="text-[10px] font-black uppercase text-indigo-500 hover:text-white transition-all underline decoration-indigo-500/30 underline-offset-8 italic">Edit</button>
                         <button onClick={() => handleDelete(job.id)} className="text-[10px] font-black uppercase text-pink-500 hover:text-white transition-all underline decoration-pink-500/30 underline-offset-8 italic">Remove</button>
                       </div>
                     ) : (
-<<<<<<< HEAD
                       <div className="flex gap-4 items-center">
                         <button 
                           onClick={() => navigate("/messages", { state: { selectedUser: job.poster } })}
@@ -305,14 +292,6 @@ export default function Jobs() {
                           APPLY NOW
                         </button>
                       </div>
-=======
-                      <button 
-                        onClick={() => handleApply(job.id)}
-                        className="px-10 py-4 bg-emerald-600 text-white rounded-[1rem] text-[9.5px] font-black uppercase tracking-[0.4em] shadow-xl hover:bg-white hover:text-slate-950 transition-all italic active:scale-95"
-                      >
-                        APPLY NOW
-                      </button>
->>>>>>> bad2c7d74b851a71b111b31ea48e4b957f7b22bb
                     )}
                   </div>
                 </div>
